@@ -1,12 +1,13 @@
 <template>
     <div class="menu3">
-        <form>
+        <form method="post" action="https://jsonplaceholder.typicode.com/posts">
             <input type="text" name="userId">
             <input type="text" name="id">
             <input type="text" name="title">
             <input type="text" name="body">
-            <button v-on:click="submit">submit</button>
-            <button v-on:click="getData">get</button>
+            <button v-on:click="submit" type="button">submit</button>
+            <button v-on:click="getData" type="button">get</button>
+            <button v-on:click="deleteData(8)" type="button">delete</button>
         </form>
         <ul class="form-result">
 
@@ -15,9 +16,9 @@
 </template>
 
 <script>
-// // import axios from 'axios'
+import axios from 'axios'
 import {getDataApi2} from '@/api/index'
-import {postDataApi2} from '@/api/index'
+// import {postDataApi2} from '@/api/index'
 export default {
     name: 'menu3',
     data() {
@@ -26,32 +27,11 @@ export default {
             id: '',
             title: '',
             body: ''
-        }
+        }   
     },
     methods: {
-        async submit() {
-            const input1 = document.querySelector("input[name=userId]")
-            const input2 = document.querySelector("input[name=id]")
-            const input3 = document.querySelector("input[name=title]")
-            const input4 = document.querySelector("input[name=body]")
-            const itemData = {
-                userId: input1.value,
-                id: input2.value,
-                title: input3.value,
-                body: input4.value
-            };
-            try {
-                // const response = await postDataApi2(itemData);
-                // postDataApi2(itemData)
-                console.log(itemData)
-                await postDataApi2(itemData)
-            }
-            catch(err) {
-                console.log('err',err)
-            }
-        },
-        getData() {
-            getDataApi2()
+        async getData() {
+            await getDataApi2()
             .then(function(response) {
                 const dataItem = response.data;
                 console.log(dataItem)
@@ -64,9 +44,54 @@ export default {
                 }
             })
             .catch(error => console.log(error))
-        }
+        },
+        async deleteData(id) {
+            // await axios.delete('https://jsonplaceholder.typicode.com/posts/' + id)
+            // .then(response => {
+            //     console.log(response)
+            // })
+            // .catch(function(err) {
+            //     console.log('err',err)
+            // })
+            try {
+                const deleteData = await axios.delete('https://jsonplaceholder.typicode.com/posts/' + id)
+                console.log(deleteData)             
+            }
+            catch(err) {
+                console.log('err',err)
+            }
+        },
+        async submit() {
+            // axios.post('https://jsonplaceholder.typicode.com/posts', {
+            //     userId: this.userId,
+            //     id: this.id,
+            //     title: this.title,
+            //     body: this.body
+            // })
+            const input1 = document.querySelector("input[name=userId]")
+            const input2 = document.querySelector("input[name=id]")
+            const input3 = document.querySelector("input[name=title]")
+            const input4 = document.querySelector("input[name=body]")
+            const itemData = {
+                userId: input1.value,
+                id: input2.value,
+                title: input3.value,
+                body: input4.value
+            };
+            try {
+                const postData = await axios.post('https://jsonplaceholder.typicode.com/posts', itemData)
+                console.log(postData)
+
+            }
+            catch(err) {
+                console.log('err',err)
+            }
+        },
+        
     },    
-    
+    // created() {
+    //     this.deleteData(10);
+    // }
 }
 </script>
 

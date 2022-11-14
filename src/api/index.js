@@ -6,10 +6,10 @@ function getDataApi() {
     return axios.get(baseUrl)
 }
 
-function postDataApi2() {
-    const baseUrl = 'https://jsonplaceholder.typicode.com/posts';
-    return axios.post(baseUrl)
-}
+// function postDataApi2() {
+//     const baseUrl = 'https://jsonplaceholder.typicode.com/posts';
+//     return axios.post(baseUrl)
+// }
 
 function getDataApi2() {
     const baseUrl = 'https://jsonplaceholder.typicode.com/posts';
@@ -18,6 +18,6 @@ function getDataApi2() {
 
 export {
     getDataApi,
-    postDataApi2,
+    // postDataApi2,
     getDataApi2
 }
