@@ -13,12 +13,16 @@ export default new Router({
       // component: () => import('../components/AppContent.vue'),
     },
     {
-      path: '/about',
-      component: () => import('../pages/about.vue'),
+      path: '/menu1',
+      component: () => import('../pages/menu1.vue'),
     },
     {
-      path: '/contact',
-      component: () => import('../pages/contact.vue'),
+      path: '/menu2',
+      component: () => import('../pages/menu2.vue'),
+    },
+    {
+      path: '/menu3',
+      component: () => import('../pages/menu3.vue'),
     }
   ],
 });

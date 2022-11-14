@@ -6,7 +6,6 @@
             <button v-on:click="clickEvt">click me!!</button><br/><br/>
             <input type="text" /><button v-on:click="textResult">submit</button>
             <b></b><br/><br/>
-            <button v-on:click="passNum">passNum</button>
         </main>
     </div>    
 </template>

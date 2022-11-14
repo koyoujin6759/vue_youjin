@@ -8,7 +8,7 @@
 
 <script>
 export default {
-    name: 'about',
+    name: 'menu1',
     data() {
         return {
             msg : 'this is about page',

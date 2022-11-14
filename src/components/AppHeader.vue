@@ -3,8 +3,9 @@
         <header>
             <ul class="gnb">
                 <li><router-link to="/">home</router-link></li>
-                <li><router-link to="/about">about</router-link></li>
-                <li><router-link to="/contact">contact</router-link></li>
+                <li><router-link to="/menu1">menu1</router-link></li>
+                <li><router-link to="/menu2">menu2</router-link></li>
+                <li><router-link to="/menu3">menu3</router-link></li>
             </ul>
         </header>
     </div>    
