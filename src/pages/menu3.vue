@@ -12,6 +12,7 @@
         <ul class="form-result">
 
         </ul>
+        <p>{{num}} <b>{{num2}}</b></p>
     </div>
 </template>
 
@@ -26,9 +27,15 @@ export default {
             userId: '',
             id: '',
             title: '',
-            body: ''
+            body: '',
+            num: 3,
         }   
     },
+    computed: {
+        num2() {
+            return this.num * 3
+        }
+    }, 
     methods: {
         async getData() {
             await getDataApi2()
