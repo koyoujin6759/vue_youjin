@@ -1,5 +1,12 @@
 <template>
     <div>
+        <div class="header_top">
+            <ul>
+                <li v-for="(topMenu,idx) in topMenu" v-bind:key="idx">
+                    <router-link :to="topMenu.url" >{{topMenu.name}}</router-link>
+                </li>
+            </ul>
+        </div>
         <nav id="nav">
             <ul class="gnb">
                 <li v-for="(menu,idx) in menus" v-bind:key="idx"> 
@@ -29,6 +36,16 @@ export default {
     data() {
         return {
             isOpen:false,
+            topMenu: [
+                {
+                    url:'/login',
+                    name: 'Login'
+                },
+                {
+                    url:'/join',
+                    name: 'Join'
+                }
+            ],
             menus: [
                 {
                     url:'/',
@@ -80,6 +97,19 @@ header {
     height:80px;
     line-height:80px;
 
+    .header_top {
+        width:100%;
+        text-align:right;
+
+        ul {
+            li {
+                display:inline-block; 
+                padding-left:20px;
+                line-height:30px;
+            }
+        }
+    }
+
     .gnb {
         background:#eee;
 
@@ -93,7 +123,7 @@ header {
             min-width:200px;
             box-sizing:border-box;
 
-            a {
+            > a,div {
                 font-size:$primary-font-size;
                 color:$primary-color;
                 line-height:70px;
