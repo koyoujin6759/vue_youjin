@@ -1,13 +1,13 @@
 <template>
     <div class="menu3">
-        <form method="post" action="https://api.hnpwa.com/v0/news.json">
+        <form method="post" action="https://jsonplaceholder.typicode.com/posts">
             <input type="text" name="userId">
             <input type="text" name="id">
             <input type="text" name="title">
             <input type="text" name="body">
             <button v-on:click="submit" type="button">submit</button>
             <button v-on:click="getData" type="button">get</button>
-            <!-- <button v-on:click="deleteData(8)" type="button">delete</button> -->
+            <button v-on:click="deleteData(8)" type="button">delete</button>
         </form>
         <ul class="form-result">
 
@@ -17,16 +17,18 @@
 </template>
 
 <script>
-// import axios from 'axios'
-import {getDataApi,basePost} from '@/api/index'
+import axios from 'axios'
+import {getDataApi2} from '@/api/index'
+// import {postDataApi2} from '@/api/index'
 export default {
     name: 'menu3',
     data() {
         return {
-            num:3,
+            userId: '',
             id: '',
             title: '',
-            domain:''
+            body: '',
+            num: 3,
         }   
     },
     computed: {
@@ -36,31 +38,43 @@ export default {
     }, 
     methods: {
         async getData() {
-            await getDataApi()
+            await getDataApi2()
             .then(function(response) {
                 const dataItem = response.data;
                 console.log(dataItem)
                 if(dataItem) {
                     const resultView = document.querySelector(".form-result")
                     const resultItem = dataItem.map(item=> {
-                        return `<li><span>${item.id}</span><span>${item.title}</span><span>${item.domain}</span></li>`
+                        return `<li><span>${item.userId}</span><span>${item.id}</span><span>${item.title}</span><span>${item.body}</span></li>`
                     }).join('')
                     resultView.innerHTML = resultItem
                 }
             })
-            .catch(error => console.log(error))            
+            .catch(error => console.log(error))
         },
-        // async deleteData(id) {  
-        //     await deleteApi(id)           
-        //     try {
-        //         const deleteDataa = await axios.delete('https://jsonplaceholder.typicode.com/posts/' + id)
-        //         console.log(deleteDataa)
-        //     }
-        //     catch {
-        //         console.log(error => console.log(error))
-        //     }
+        async deleteData(id) {            
+            try {
+                const deleteDataa = await axios.delete('https://jsonplaceholder.typicode.com/posts/' + id)
+                console.log(deleteDataa)
+            }
+            catch {
+                console.log(error => console.log(error))
+            }
+
+            // await deleteApi(id) 
+            // .then(function(response) {
+            //     console.log(response)
+            // })
+            // .catch(error => console.log(error))
             
-        // },
+            // try {
+            //     const deleteData = await axios.delete('https://jsonplaceholder.typicode.com/posts/' + id)
+            //     console.log(deleteData)             
+            // }
+            // catch(err) {
+            //     console.log('err',err)
+            // }
+        },
         async submit() {            
             const input1 = document.querySelector("input[name=userId]")
             const input2 = document.querySelector("input[name=id]")
@@ -72,19 +86,19 @@ export default {
                 title: input3.value,
                 body: input4.value
             };
-            // await basePost()
-            // .then(function(response) {
-            //     const dataItem = response.data;
-            //     console.log(dataItem)
-                
-            // })
-            // .catch(error => console.log(error))    
+            axios.post('https://jsonplaceholder.typicode.com/posts', {
+                userId: this.userId,
+                id: this.id,
+                title: this.title,
+                body: this.body
+            })
             try {
-                const postData = await basePost(itemData) 
+                const postData = await axios.post('https://jsonplaceholder.typicode.com/posts', itemData)
                 console.log(postData)
+
             }
-            catch {
-                console.log(error => console.log(error))
+            catch(err) {
+                console.log('err',err)
             }
         },
         
