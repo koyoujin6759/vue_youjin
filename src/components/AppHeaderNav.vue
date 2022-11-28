@@ -17,9 +17,9 @@
                         v-on:mouseleave="mouseleave"
                     >
                         {{menu.name}}
-                        <ul class="dropdown" :class="{ isOpen }">
+                        <ul class="dropdown" :class="{ 'isOpen': isOpen }">
                             <li v-for="(child,idx) in menu.children" v-bind:key="idx">
-                                <router-link to="/">{{child.name}}</router-link>
+                                <router-link :to="child.url">{{child.name}}</router-link>
                             </li>
                         </ul>
                     </div>
